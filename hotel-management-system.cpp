@@ -59,62 +59,53 @@ Private:
     Booking getBookingDetails(){
         Booking b;
         cin.ignore();
-        cout <<
-void displayMenu(){
-    cout<< "1. Book a room"<<endl;
-    cout<<"2. View bookings"<<endl;
-    cout<<"3. Checkout (coming soon)"<<endl;
-    cout<<"4. Exit"<<endl;
-    cout<<"Enter your choice:";
-}
-
-void bookRoom(){
-    Booking newBooking;
-    cout<<"Enter guest name:";
-    cin.ignore();
-    getline(cin, newBooking.guestName);
-
-    cout<<"Enter room type(Single/Double/Suite):";
-    getline(cin, newBooking.roomType);
-
-    cout<<"Enter number of nights:";
-    cin>> newBooking.nights;
-    bookings.push_back(newBooking);
-    cout<<"Room booked successfully for"<<newBooking.guestName<<"!"<<endl;
-}
-
-void viewBookings(){
-    if (bookings.empty()){
-        cout<<"No bookings available."<<endl;
-    return;
+        cout << "Guest name:";
+        getline(cin, b.name);
+        cout<< "roomType:";
+        getline(cin, b.roomType);
+        cout<< "Nights:";
+        cin>> b.nights;
+        return b;
     }
-    cout<<"\n---Current Bookings---"<<endl;
-    for (size_t i=0; i < bookings.size(); i++){
-        cout<<i+1 <<"." <<bookings[i].guestName<<"_"<<
-        bookings[i].roomType<<"for"<<
-        bookings[i].nights<<"night(s)"<<endl;
-    }
-}
-int main(){
-    int choice;
 
-    while (true){
-        displayMenu();
-        cin>> choice;
-
-        switch (choice){
-            case 1:
-                bookRoom();
-                break;
-            case 2:
-                viewBookings();
-                break;
-            case 3:
-                cout<<"Checkout feature coming soon!"<<endl;
-                break;
-            case 4:
-                cout<<"Thank you for using the Hotel Management System."<<endl;
+    void viewBookings(){
+        if (bookings.empty()){
+            cout<< "No bookings yet.\n";
+            return;
+        }
+        cout<< "\n---Bookings---\n";
+        for (int i = 0; i < bookings.size(); ++i){
+                printBooking(i, bookings [i];
         }
     }
+    void printBooking (int index, const Booking & b){
+        cout<< index + 1 << "." << b.name <<"_" << b.roomType << "_" << b.nights << "night(s)\n";
+    }
+    void checkout(){
+        if (bookings.empty()){
+        cout << "No bookings to check out.\n";
+        return;
+        }
+        viewBookings ();
+        int num = getCheckoutNumber();
+        if (num<1 || num > bookings.size()){
+            cout << "Invalid number.\n";
+            return;
+        }
+
+        cout << "Checked out" << bookings[num -1] name<<".\n";
+
+        bookings.erase(bookings.begin() + num -1);
+    }
+
+    int getCheckoutNumber(){
+        int num;
+        cout<< "Enter booking number to checkout:";
+        cin >> num;
+        return num;
+    }
+};
+int main(){
+    HotelSystem hotel;
+    hotel.run();
     return 0;
-}
