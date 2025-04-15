@@ -5,98 +5,103 @@
 using namespace std;
 
 class HotelSystem{
-private:
-    stuct Booking{
-    string name, roomType;
+    struct Booking{
+    string name;
+    string roomType;
     int nights;
     };
 
-    vector<Booking> bookings;
-public:
+    vector <Booking> bookings;
 
-    void run(){
+    void run() {
         int choice;
-        while(true){
-            showMenu():
-            choice = 
-        getUserChoice();
-        handleChoice(choice);
-        if (choice == 4) break;
+        while (true) {
+            showMenu();
+            choice = getUserChoice(choice);
+            if (choice == 4)
+                break;
         }
     }
-private:
-    void showMenu(){Hotel Menu ---\n"
-        <<"1. BookRoom\n"
-        <<"2. ViewBookings\n"
-        <<"3. Checkout\n"
-        <<"4. Exit\n"
-        <<"Choose:";
+    void showMenu() {
+        cout << "\n--- Hotel Menu ---\n"
+             << "1. Book Room\n"
+             << "2. View Bookings\n"
+             << "3. Checkout\n"
+             << "4. Exit\n"
+             << "Choose: ";
     }
 
-    int getUserChoice(){
+    int getUserChoice() {
         int choice;
-        cin>> choice;
+        cin >> choice;
         return choice;
     }
 
-    void handleChoice(int choice){
-        switch(choice){
-            case1: bookRoom();
+    void handleChoice(int choice) {
+        switch (choice) {
+            case 1: bookRoom();
             break;
 
-            case2: viewBookings();
+            case 2: viewBookings();
             break;
 
-            case3: checkout();
+            case 3: checkout();
             break;
 
-            case4: cout << "Goodbye!\n";
+            case 4: cout << "Goodbye\n";
             break;
 
-            default: cout << "Invalid option.\n";
+            default: cout << "Invalid option\n";
         }
     }
-    
-    Booking getBooking Details(){
+
+    void bookRoom() {
+        Booking b = getBookingDetails();
+        bookings.push_back(b);
+        cout << "Booked for" << b.name << "!\n";
+    }
+
+    Booking getBookingDetails() {
         Booking b;
         cin.ignore();
-        cout << "Guest name:";
+        cout << "Guest name: ";
         getline(cin, b.name);
-        cout <<"Room Type:";
+        cout << "Room Type: ";
         getline(cin, b.roomType);
-        cout << "Nights:";
+        cout << "Nights: ";
         cin >> b.nights;
         return b;
     }
 
-    void viewBookings(){
-        if (bookings.empty()){
-            cout << "No bookings yet.\n";
+    void viewBookings() {
+        if (bookings.empty()) {
+            cout << "No booking yet.\n";
             return;
         }
         cout << "In---Bookings---\n";
-        for(int i = 0; i < bookings.size(); ++i){
-                printBooking (i, bookings [i];
+        for (int i = 0; i < bookings.size(); ++i) {
+            printBooking(i, bookings [i];
         }
     }
 
-    void printBooking (int index, const Booking & b){
-        cout << index + 1 << "." <<b.name << "_" <<b.roomType <<"_" <<b.nights<<"night(s)\n";
+    void printBooking (int index, const Booking& b) {
+        cout << index + 1 << "." << b.name << "_" << b.roomType << "_" << b.nights << "night(s)\n";
     }
-    
-    void checkout(){
-        if (bookings.empty()){
+
+    void checkout() {
+        if (bookings.empty()) {
             cout << "No bookings to checkout.\n";
             return;
     }
+
         viewBookings();
         int num = getCheckoutNumber();
-        if (num < 1 || num > bookings.size()){
-            cout << "Invalid number.n\";
+        if (num < 1 || num > bookings.size()) {
+            cout << "Invalid number.\n";
             return;
         }
-        
-        cout << "Checked out" << bookings[num -1] name<< ".n\";
+
+        cout << "Checked out" << bookings[num -1].name << "\n";
 
         bookings.erase(bookings.begin() + num -1);
         }
@@ -107,9 +112,11 @@ private:
             cin >> num;
             return num;
         }
-    };
-int main(){
+};
+
+int main() {
     HotelSystem hotel;
     hotel.run();
     return 0;
 }
+            
