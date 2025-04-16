@@ -4,7 +4,9 @@
 
 using namespace std;
 
-class HotelSystem{
+class HotelSystem {
+public:
+
     struct Booking{
     string name;
     string roomType;
@@ -17,7 +19,7 @@ class HotelSystem{
         int choice;
         while (true) {
             showMenu();
-            choice = getUserChoice(choice);
+            choice = getUserChoice();
             if (choice == 4)
                 break;
         }
@@ -80,7 +82,7 @@ class HotelSystem{
         }
         cout << "In---Bookings---\n";
         for (int i = 0; i < bookings.size(); ++i) {
-            printBooking(i, bookings [i];
+            printBooking(i, bookings [i]);
         }
     }
 
